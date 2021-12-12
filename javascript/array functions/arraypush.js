@@ -1,5 +1,5 @@
 // push append one or more value at the end
-// push return the length of array
+// push return the new length of array
 let arr = [10, 20, 80, 100, 50];
 disaplayArray(arr);
 
