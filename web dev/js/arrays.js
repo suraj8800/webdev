@@ -22,7 +22,7 @@ array.unshift('first value');
 console.log(array);
 
 array.shift();
-console.log('********** SHIFT ->remove value at last ***********');
+console.log('********** SHIFT ->remove value at first ***********');
 console.log(array);
 
 console.log('----------------------');

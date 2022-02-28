@@ -8,6 +8,10 @@ while(temp >= 1){
     temp = temp / 10;
     count++;
 }
+k = k%count;
+if(k < 0){
+    k = k + count;
+}
 
 let div = 1;
 let multi = 1;
