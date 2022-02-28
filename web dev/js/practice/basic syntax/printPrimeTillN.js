@@ -1,7 +1,7 @@
 let number = process.argv;
-let low = parseInt.prompt(number[2]);
-let high = parseInt.prompt(number[3]);
-console.log('enter low number' ${low} and 'enter high number' ${high});
+let low = parseInt(number[2]);
+let high = parseInt(number[3]);
+console.log("enter low number", low, "and", "enter high number", high);
 for(let i = low; i<= high; i++){
     let flag = true;
     let div = 2;
