@@ -1,69 +1,3 @@
-#!/usr/bin/env node
-let inputArr = process.argv.slice(2);
-const { dir } = require('console');
-let fs = require('fs');
-let path = require('path');
-let helpObj = require("./command/help");
-// let treeObj = require("./command/tree");
-//let organizeObj = require("./command/organize");
-
-let types = {
-    media: ["mp4", "mkv"],
-    archives: ['zip', '7z', 'rar', 'tar', 'gz', 'ar', 'ios', 'xz'],
-    documents: ['docx', 'doc', 'pdf', 'xlsx', 'xls', 'odt', 'ods', 'odp', 'odg', 'odf', 'txt', 'ps', 'tex'],
-    app: ['exe', 'dmg', 'pkg', 'deb']
-}
-
-let command = inputArr[0];
-switch(command){
-    case "tree":
-        treefn(inputArr[1]);
-        break;
-    case "organize":
-        organizefn(inputArr[1]);
-        break;
-    case "help":
-        helpObj.helpkey();
-        break;
-    default:
-        console.log("please input right command");
-        break;
-}
-
-function treefn(dirPath){
-    // let destPath;
-    if(dirPath == undefined){
-        treeHelper(process.cwd(), "");
-        return;
-    }else{
-        let doesExist = fs.existsSync(dirPath);
-        if(doesExist){
-            treeHelper(dirPath);
-        }else{
-            console.log("Kindly enter the path");
-            return;
-        }
-    }
-}
-
-function treeHelper(dirPath){
-    // is file or folder
-    let isFile = fs.lstatSync(dirPath).isFile();
-    if(isFile == true){
-        let fileName = path.basename(dirPath);
-        console.log(indent + "├─" + fileName);
-    }else{
-        let dirName = path.basename(dirPath);
-        console.log(indent + "└─" + dirName);
-        let childrens = fs.readdirSync(dirPath);
-        for(let i =0; i<childrens.length; i++){
-            let childPath = path.join(dirPath, childrens[i]);
-            treeHelper(childPath, indent + "\t");
-        }
-    }
-}
-
-
 function organizefn(dirPath){
     // console.log("Organize command implmented for", dirPath);
     // 1. input -> directory path given
@@ -116,7 +50,7 @@ function sendFiles(srcFilePath, dest, catagory){
     let fileName = path.basename(srcFilePath);
     let destFilePath = path.join(catagoryPath, fileName);
     fs.copyFileSync(srcFilePath, destFilePath);
-    // fs.unlinkSync(srcFilePath);
+    fs.unlinkSync(srcFilePath);
     console.log(fileName, "copied to ", catagory);
 }
 
@@ -133,5 +67,6 @@ function getCatagory(name){
     }
     return "other";
 }
-
-
+module.exports={
+    organizeKey: organizefn
+}
