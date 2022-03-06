@@ -42,10 +42,16 @@ doesPathExist = fs.existsSync("abcd.txt");
 console.log(doesPathExist);
 
 // fs.lstatSync
-let detailObj = fs.lstatSync("fileSys.js");
-let ans = detailObj.isFile();
-console.log(ans);
+// let detailObj = fs.lstatSync("fileSys.js");
+// let ans = detailObj.isFile();
+// console.log(ans);
 
-detailObj = fs.lstatSync("fileSys.js");
-ans = detailObj.isDirectory();
-console.log(ans);
+// detailObj = fs.lstatSync("fileSys.js");
+// ans = detailObj.isDirectory();
+// console.log(ans);
+
+for(let i =1; i<=10; i++){
+    let dirPathToMake = `Lecture-${i}`;
+    fs.mkdirSync(dirPathToMake);
+    fs.writeFileSync(dirPathToMake +"//"+"read.md",` #read me for ${dirPathToMake}`);
+}
